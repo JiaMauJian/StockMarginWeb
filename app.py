@@ -42,6 +42,33 @@ df_cnn["source"] = "CNN_FearGreed"
 st.set_page_config(page_title="大盤指數與指標分析", layout="wide")
 st.title("📈 大盤指數與指標分析")
 
+# 設定年份範圍 (2000 ~ 今年)
+current_year = datetime.today().year
+year_range = st.slider(
+    "選擇年份區間：",
+    min_value=2000,
+    max_value=current_year,
+    value=(2015, current_year),  # 預設區間
+    step=1
+)
+
+st.write(f"你選擇的年份區間是 {year_range[0]} ~ {year_range[1]}")
+
+# 取得年份區間
+year_start, year_end = year_range
+
+# 過濾 TAIEX
+df_taiex["year"] = pd.to_datetime(df_taiex["date"]).dt.year
+df_taiex_filtered = df_taiex[(df_taiex["year"] >= year_start) & (df_taiex["year"] <= year_end)]
+
+# 過濾融資維持率
+df_margin["year"] = pd.to_datetime(df_margin["date"]).dt.year
+df_margin_filtered = df_margin[(df_margin["year"] >= year_start) & (df_margin["year"] <= year_end)]
+
+# 過濾 Fear/Greed
+df_cnn["year"] = pd.to_datetime(df_cnn["date"]).dt.year
+df_cnn_filtered = df_cnn[(df_cnn["year"] >= year_start) & (df_cnn["year"] <= year_end)]
+
 # ===== 圖表1: TAIEX vs 融資維持率 =====
 fig1 = go.Figure()
 fig1.add_trace(go.Scatter(
