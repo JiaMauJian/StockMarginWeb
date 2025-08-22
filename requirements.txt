@@ -4,3 +4,5 @@ tqdm
 altair
 pandas
 numpy
+plotly
+requests
