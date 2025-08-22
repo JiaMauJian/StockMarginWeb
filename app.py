@@ -39,7 +39,8 @@ temp = res.json()
 df_cnn = pd.DataFrame(temp["data"])
 df_cnn["source"] = "CNN_FearGreed"
 
-st.title("台股市場觀測 📊")
+st.set_page_config(page_title="大盤指數與指標分析", layout="wide")
+st.title("📈 大盤指數與指標分析")
 
 # ===== 圖表1: TAIEX vs 融資維持率 =====
 fig1 = go.Figure()
