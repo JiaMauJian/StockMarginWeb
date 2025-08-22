@@ -1,0 +1,5 @@
+streamlit
+finmind
+altair
+pandas
+numpy
