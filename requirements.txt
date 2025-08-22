@@ -1,5 +1,6 @@
 streamlit
 finmind
+tqdm
 altair
 pandas
 numpy
